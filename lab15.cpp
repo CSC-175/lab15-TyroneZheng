@@ -2,7 +2,7 @@
 using namespace std;
 
 // Function to calculate factorial recursively
-long long factorial(int num) {
+double factorial(int num) {
     if (num == 0 || num == 1)
         return 1;
     return num * factorial(num - 1);
@@ -10,7 +10,7 @@ long long factorial(int num) {
 
 // Function to compute the number of ways to choose k from n
 double computeWays(int n, int k) {
-    return static_cast<double>(factorial(n)) / (factorial(k) * factorial(n - k));
+    return factorial(n) / (factorial(k) * factorial(n - k));
 }
 
 // Function to get and validate user input
@@ -25,7 +25,7 @@ void getInfo(int& n, int& k) {
 
     cout << "How many balls (1-" << n << ") will be drawn? ";
     while (!(cin >> k) || k < 1 || k > n) {
-        cout << "Input Error! ";
+        cout << "Input Error!\n";
         cin.clear();
         cin.ignore(10000, '\n');
         cout << "How many balls (1-" << n << ") will be drawn? ";
