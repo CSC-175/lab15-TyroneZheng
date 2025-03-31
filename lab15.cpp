@@ -1,35 +1,33 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-// Function prototypes
-void getInfo(int&, int&);
-double computeWays(int, int);
-double factorial(int);
+// Function to calculate factorial recursively
+long long factorial(int num) {
+    if (num == 0 || num == 1)
+        return 1;
+    return num * factorial(num - 1);
+}
 
-/*******************************************************************
-* getLotteryInfo                                                   *
-* Gets and validates lottery info from the user and places it in   *
-* reference parameters referencing variables in the main function. *
-********************************************************************/
+// Function to compute the number of ways to choose k from n
+double computeWays(int n, int k) {
+    return static_cast<double>(factorial(n)) / (factorial(k) * factorial(n - k));
+}
 
+// Function to get and validate user input
+void getInfo(int& n, int& k) {
+    cout << "How many balls (1-12) are in the pool to pick from? ";
+    while (!(cin >> n) || n < 1 || n > 12) {
+        cout << "Input Error! There must be between 1 and 12 balls.\n";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "How many balls (1-12) are in the pool to pick from? ";
+    }
 
-
-/*******************************************************************
-* computeWays                                                      *
-* Computes and returns the number of different possible sets       *
-* of k numbers that can be chosen from a set of n numbers.         *
-* The formula for this is     k!(n- k)!                            *
-*                             --------                             *
-*                                 n!                               *
-* Note that the computation is done in a way that does not require *
-* multiplying two factorials together. This is done to prevent any *
-* intermediate result becoming so large that it causes overflow.   *
-********************************************************************/
-
-
-/*******************************************************************
-* factorial                                                        *
-* This function computes factorials recursively.                   *
-*******************************************************************/
-
-
+    cout << "How many balls (1-" << n << ") will be drawn? ";
+    while (!(cin >> k) || k < 1 || k > n) {
+        cout << "Input Error! ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "How many balls (1-" << n << ") will be drawn? ";
+    }
+}
